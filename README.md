@@ -1,2 +1,3 @@
-# canarium-plugins-airbnb-quote
+# CanariumAirbnbQuote
+
 Airbnb quote calculator plugin for Canarium
