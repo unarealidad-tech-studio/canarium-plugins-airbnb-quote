@@ -1,0 +1,31 @@
+{
+    "name":         "unarealidad/canarium-plugins-airbnb-quote",
+    "type":         "library",
+    "description":  "Airbnb quote calculator plugin for Canarium",
+    "keywords":     ["canarium", "una realidad", "airbnb", "hotels"],
+    "homepage": "http://www.canarium.ph",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Errol A. Zuñiga Jr.",
+            "email": "errol.zuniga@unarealidad.com",
+            "role": "developer",
+            "homepage": "https://github.com/Fatal-Errol"
+        }
+    ],
+    "support": {
+        "email":    "errol.zuniga@unarealidad.com"
+    },
+
+    "minimum-stability": "stable",
+
+    "autoload": {
+        "psr-0": {
+            "Form\\": "src/"
+        },
+        "classmap": [
+            "./Module.php"
+        ]
+    }
+
+}
