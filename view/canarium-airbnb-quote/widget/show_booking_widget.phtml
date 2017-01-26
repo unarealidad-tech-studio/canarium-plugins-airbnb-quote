@@ -1,0 +1,56 @@
+<form name="dateForm" method="post" action="{{formUrl}}" target="_blank">
+    <input type="hidden" name="checkin" value="{{start_date}}">
+    <input type="hidden" name="checkout" value="{{end_date}}">
+    <input type="hidden" name="number_of_guests" value="{{number_of_guests}}">
+    <div id="book-now"
+
+        >
+        <div class="container">
+            <div class="book-now-menu">
+                <span class="book-now-title">Book Now</span>
+                <a href="javascript:void(0)" class="form-open"></a>
+            </div>
+            <div class="book-now-menu-list">
+
+                <ul>
+                    <li>
+                        <div class="fleft">
+                            <select name="host_id"" required>
+                            <option value="-1">Select Cabin</option>
+                            <?php
+                            foreach ($cabins as $name => $host_id) {
+                                echo '<option '.(!$host_id ? 'disabled' : '').' value="'.$host_id.'">'.$name.'</option>';
+                            }
+                            ?>
+                            </select>
+                        </div>
+                    </li>
+                    <li>
+                        <input required ng-disabled="date_picker_loading || !host_id" autocomplete="off" date-range-picker id="daterange1" name="daterange1" placeholder="Enter Dates" class="datepicker" ng-model="date" min="today" options="options" required><div class="fa fa-calendar booknow-icon"></div>
+                    </li>
+                    <li>
+                        <div class="fleft" ng-class="{disabled: !host_id}">
+                            <select name="guests" required ng-disabled="!host_id">
+                                <?php
+                                for ($x = 1; $x <= 6; $x++) {
+                                    echo '<option value="'.$x.'">'.$x.' Guest'.($x>1?'s':'').'</option>';
+                                }
+                                ?>
+                            </select>
+                        </div>
+                    </li>
+                    <li>
+                        <p ng-if="!loading && !date_picker_loading && quote.available">{{quote.total.amount|currency : '$' : 2}} {{quote.total.currency}}</p>
+                        <p ng-if="!loading && !date_picker_loading && !quote.available && start_date && end_date">{{quote.error || 'Invalid options'}}</p>
+                        <p ng-if="!loading && !date_picker_loading && host_id && (!start_date || !end_date)">Please Enter Dates</p>
+                        <p ng-if="!loading && !date_picker_loading && !host_id">Select Cabin</p>
+                        <p ng-if="loading || date_picker_loading">Loading...</p>
+                    </li>
+                    <li>
+                        <button type="submit" ng-disabled="!quote.available || loading || date_picker_loading" class="btn">NEXT <br> <small>with Airbnb</small></button
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</form>

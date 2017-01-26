@@ -18,6 +18,12 @@ class AirbnbQuote implements ServiceLocatorAwareInterface
      */
     protected $objectManager;
 
+
+    public function showBookingWidget()
+    {
+
+    }
+
     /**
      * Retrieve service manager instance
      *

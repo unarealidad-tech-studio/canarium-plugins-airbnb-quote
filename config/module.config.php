@@ -10,7 +10,7 @@ return array(
     'bjyauthorize' => array(
         'guards' => array(
             'BjyAuthorize\Guard\Controller' => array(
-                array('controller' => 'CanariumAirbnbQuote\Index', 'roles' => array('admin', 'user')),
+                array('controller' => 'CanariumAirbnbQuote\Index', 'roles' => array('guest', 'admin', 'user')),
             ),
         ),
     ),
@@ -39,6 +39,9 @@ return array(
     'view_manager' => array(
         'strategies' => array(
             'ViewJsonStrategy',
+        ),
+        'template_map' => array(
+            'widget/booking' => __DIR__ . '/../view/canarium-airbnb-quote/widget/show_booking_widget.phtml'
         )
     )
 

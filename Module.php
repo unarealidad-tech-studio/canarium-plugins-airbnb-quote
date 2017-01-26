@@ -30,19 +30,39 @@ class Module
         );
     }
 
+    public function getViewHelperConfig()
+    {
+        return array(
+            'invokables' => array(
+                'canariumShowBookingWidget' => 'CanariumAirbnbQuote\View\Helper\ShowBookingWidget',
+            ),
+        );
+
+    }
+
     public function getServiceConfig()
     {
         return array(
             'invokables' => array(
-            'canarium.airbnb_quote.service' => 'CanariumAirbnbQuote\Service\AirbnbQuote',
+                'canarium.airbnb_quote.service' => 'CanariumAirbnbQuote\Service\AirbnbQuote',
             ),
             'factories' => array(
                 'canarium.airbnb_quote.module_option' => function ($sm) {
                     $config = $sm->get('Config');
-                    return new Options\ModuleOptions(isset($config['canariumairbnbquote']) ? $config['canariumairbnbquote'] : array());
+                    return new Option\ModuleOptions(isset($config['canariumairbnbquote']) ? $config['canariumairbnbquote'] : array());
+                },
+                'canarium.airbnb_quote.widget_form' => function($sm) {
+                    /**
+                     * @var Option\ModuleOptions $options
+                     */
+                    $options = $sm->get('canarium.airbnb_quote.module_option');
+                    $host_ids = $options->getHostIds();
+                    $form = new Form\WidgetForm($options->getDateFormat(), $host_ids);
+
+                    $form->setInputFilter(new Form\WidgetFilter(array_keys($host_ids)));
+                    return $form;
                 }
             )
         );
     }
-
 }
